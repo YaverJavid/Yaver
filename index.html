@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HTML</title>
+    <style>body {
+    font-size: 15pt;
+}
+#Sensor{
+    background-color:#000000;
+    width:100%;
+    height: 700px;
+    display: flex;
+}
+#textBox{
+    align-self: center;
+    position: relative;
+    color: whitesmoke;
+}
+</style>
+</head>
+
+<body>
+    <div id="Sensor" onclick="ick()">
+        <h4 id="textBox">Touch as soon as the colour turns Red!</h4>
+    </div>
+    <!-- Project -->
+    <script >
+        random = 0;
+tim = 0;
+var zy = undefined;
+var count = 0;
+var sum = 0;
+var newGame = null;
+var dov = document.getElementById("Sensor")
+setInterval(() => {
+    const y = document.getElementById("Sensor");
+    var z = window.getComputedStyle(y);
+    zy = z.backgroundColor;
+}, 1.0)
+var funcc = window.getComputedStyle(document.getElementById("Sensor")).backgroundColor;
+
+function GetRand() {
+    random = Math.floor(Math.random() * 5)
+    if (random === 0) {
+        tim = 3000;
+    } else if (random === 1) {
+        tim = 3500;
+    } else if (random === 2) {
+        tim = 1200;
+    } else if (random === 3) {
+        tim = 600;
+    } else {
+        tim = 2000;
+    }
+}
+GetRand();
+
+function Doo() {
+    dov.style.backgroundColor = "red"
+    global = Date.now()
+}
+function ick() {
+    if (zy === funcc) {
+        var msg = "You Loose";
+        document.getElementById("textBox").innerText = msg;
+        alert("You Loose")
+        newGame = confirm("Wanna Play Again ?")
+        if (newGame) {
+            location.href = "index.html"
+        } else {
+            process = "kill"
+            location.href = "Fin.htm"
+        }
+    } else {
+        dov.style.backgroundColor = "black";
+        Glo = Date.now() - global;
+        sum = sum + Glo;
+        setTimeout(Doo, tim);
+        GetRand();
+        count = count + 1;
+        semiGlobal = `Reactions ${count}/10 || ${Date.now() - global} ms`;
+        textBox.innerHTML = semiGlobal;
+        if (count === 10) {
+            var msg2 = (`Reactions:${count}/10 ||` + "You Finished With Average" + Math.trunc(sum / 10))
+            textBox.innerHTML = msg2;
+            count = 0;
+        }
+    }
+}
+setTimeout(Doo, tim - 2)
+    </script>
+</body>
+
+</html>
+<style>
+    
+</style>
